@@ -19,7 +19,7 @@ Get last Microsoft Office 365 SKU / Service plans info (GUID, String ID, Product
 ## Notes version :
 ### 1.0.0 first public release
  - cmdlet to list all SKUs / Services Plan available in Microsoft catalog : *Get-O365SKUCatalog*
-     - information are downloaded from microsoft.com website
+     - information are downloaded from [microsoft.com website](https://docs.microsoft.com/en-us/azure/active-directory/enterprise-users/licensing-service-plan-reference)
  - cmdlet to get all availabe information about a SKU : *Get-O365SKUinfo*
      - you can find a SKU based on its GUID, String ID (technical name), or friendly name (aka commercial name)
  - cmdlet to get all availabe information about a Service Plan : *Get-O365Planinfo*

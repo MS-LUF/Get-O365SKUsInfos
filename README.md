@@ -31,7 +31,8 @@ Get last Microsoft Office 365 SKU / Service plans info (GUID, String ID, Product
 - When you often deal with Office 365 SKUs and Services Plan (technically speaking) it's a nightmare to resolve name to technical GUID to be sure the proper SKU and Service Plan is linked to the right Azure AD user or Azure AD group.
 - Moreover the licensing Graph API is built on a "black list" system regarding the Services Plans it means you have to specify all Services Plan to be disabled instead of just giving the one to be enabled...
 - I hope it could help someone to deal with word instead of GUID in your scripts :)
-- Also, sometimes some guys are asking me what SKU should be ordered in order to cover X ou Y Services Plan... So instead of looking for markdown or html document from Microsoft, you can quickly have your answer using a PowerShell oneliner command :) 
+- Also, sometimes some guys are asking me what SKU should be ordered in order to cover X ou Y Services Plan... So instead of looking for markdown or html document from Microsoft, you can quickly have your answer using a PowerShell oneliner command :)
+- Last but not least... those informations (SKUs & Service Plans) could be updated several times a year ! it means you cannot have a static catalog file somewhere, you have to follow the updates... (*you know... those famous O365 / Azure Microsoft mails you receive every day and never read... ^^*)
 
 ## How To
 [Simple How TO](https://github.com/MS-LUF/Get-O365SKUsInfos/blob/main/HOWTO.md)

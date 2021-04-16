@@ -7,14 +7,14 @@ Get last Microsoft Office 365 SKU / Service plans info (GUID, String ID, Product
     - find in what SKU a service plan is covered
     - get general informations about a Service Plan or SKU 
 
-(c) 2020 lucas-cueff.com Distributed under Artistic Licence 2.0 (https://opensource.org/licenses/artistic-license-2.0).
+(c) 2021 lucas-cueff.com Distributed under Artistic Licence 2.0 (https://opensource.org/licenses/artistic-license-2.0).
 
 ## Notes
 - SKU / Service Plan informations updated directly from Microsoft Website and send back as powershell object.
 - this module requires an internet access to get online information from Microsoft Website.
     - if you are using an indirect internet access through a proxy, please use `System.Net.WebProxy` object to set your environment before using the functions
-- this module is designed to be used on **Windows PowerShell**
-    - `Microsoft.PowerShell.Commands.HtmlWebResponseObject` class is used to parse HTML table
+- this module is designed to be used on **Windows system**, compatible with both **Windows PowerShell** and **PowerShell**
+    - `HTMLFile` com object is used to parse HTML table
 
 ## Notes version :
 ### 1.0.0 first public release
@@ -26,6 +26,10 @@ Get last Microsoft Office 365 SKU / Service plans info (GUID, String ID, Product
      - you can find a Service Plan based on its GUID, String ID (technical name), or friendly name (aka commercial name)
  - cmdlet to find in the SKUs containing a Service Plan : *Get-O365SKUInfoFromPlan*
      - you can use a Service Plan based on its GUID, String ID (technical name), or friendly name (aka commercial name)
+### 1.1.0 last public release
+ - fix IE com object issue (Windows pwsh crash with invoke-webrequest)
+ - using basic parsing and HTMLFile com object
+ - now compatible with Powershell Core on Windows system
 
 ## Why this PowerShell Module
 - When you often deal with Office 365 SKUs and Services Plan (technically speaking) it's a nightmare to resolve name to technical GUID to be sure the proper SKU and Service Plan is linked to the right Azure AD user or Azure AD group.

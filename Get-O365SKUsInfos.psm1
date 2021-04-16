@@ -4,6 +4,7 @@
 ## released on 01/2021
 #
 # v1.0.0 : first public release - beta version
+# v1.1.0 : last public release - beta version - fix IE com object (windows pwsh crash with invoke-webrequest)
 #
 #'(c) 2020-2021 lucas-cueff.com - Distributed under Artistic Licence 2.0 (https://opensource.org/licenses/artistic-license-2.0).'
 <#
@@ -36,12 +37,12 @@ function Convert-HTMLTableToArray {
     [cmdletbinding()]
     param(
         [Parameter(Mandatory = $true)]
-            [Microsoft.PowerShell.Commands.HtmlWebResponseObject]$WebRequest,
+            $HTMLObject,
         [Parameter(Mandatory = $true)]
             [int]$TableNumber
     )
     process {
-        $tables = @($WebRequest.ParsedHtml.getElementsByTagName("TABLE"))
+        $tables = @($HTMLObject.getElementsByTagName("TABLE"))
         $table = $tables[$TableNumber]
         $titles = @()
         $rows = @($table.Rows)
@@ -100,15 +101,40 @@ function Get-O365SKUCatalog {
             [switch]$AsGlobalVariable
     )
     process {
-        $script:URICatalog =  "https://docs.microsoft.com/en-us/azure/active-directory/enterprise-users/licensing-service-plan-reference"
+        #$script:URICatalog =  "https://docs.microsoft.com/en-us/azure/active-directory/enterprise-users/licensing-service-plan-reference"
+        $script:URICatalog = "https://github.com/MicrosoftDocs/azure-docs/blob/master/articles/active-directory/enterprise-users/licensing-service-plan-reference.md"
+        $script:tempfile = [System.IO.Path]::GetTempFileName()
         write-verbose "Microsoft O365 SKU catalog URL : $($script:URICatalog)"
+        write-verbose "Temporary html file : $($script:tempfile)"
         try {
-            $request = Invoke-WebRequest -Uri $script:URICatalog
+            $request = Invoke-WebRequest -Uri $script:URICatalog -OutFile $script:tempfile -UseBasicParsing
         } catch {
             throw "Microsoft O365 SKU online catalog $($script:URICatalog) is not available. Please check your network / internet connexion."
         }
-        if ($request) {
-            $skuinfo = Convert-HTMLTableToArray -WebRequest $request -TableNumber 0
+        if (!(test-path $script:tempfile)) {
+            throw "not able to dowload licensing-service-plan-reference HTML content to $($script:tempfile)"
+        } else {
+            write-verbose "Temporary html file $($script:tempfile) created successfully"
+        }
+        $htmlcontent = get-content -Raw -Path $script:tempfile
+        try {
+            $htmlobj = New-Object -ComObject "HTMLFile"
+        } catch {
+            throw "not able to create HTMLFile com object"
+        }
+        try {
+            if ($host.Version.Major -gt 5) {
+                $encodedhtmlcontent = [System.Text.Encoding]::Unicode.GetBytes($htmlcontent)
+                $htmlobj.write($encodedhtmlcontent)
+            } else {
+                $htmlobj.IHTMLDocument2_write($htmlcontent)
+            }
+        }
+        catch {
+            throw "not able to create Com HTML object from temporary file $($script:tempfile)"
+        }
+        if ($htmlobj) {
+            $skuinfo = Convert-HTMLTableToArray -HTMLObject $htmlobj -TableNumber 1
         }
         $skuinfo
         foreach ($sku in $skuinfo) {

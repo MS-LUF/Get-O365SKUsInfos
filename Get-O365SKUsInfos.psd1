@@ -12,7 +12,7 @@
 RootModule = 'Get-O365SKUsInfos.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.0.0'
+ModuleVersion = '1.1.0'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -107,7 +107,7 @@ PrivateData = @{
         IconUri = 'https://www.lucas-cueff.com/files/gallery.png'
 
         # ReleaseNotes of this module
-        ReleaseNotes = "first release - Get last Microsoft Office 365 SKU / Service plans info (GUID, String ID, Product Name)."
+        ReleaseNotes = "last release - fix IE com object issue with last HTML update released."
 
     } # End of PSData hashtable
 

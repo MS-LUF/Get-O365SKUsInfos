@@ -123,7 +123,7 @@ function Get-O365SKUCatalog {
             throw "not able to create HTMLFile com object"
         }
         try {
-            if ($host.Version.Major -gt 5) {
+            if ($PSVersionTable.PSVersion.Major -gt 5) {
                 $encodedhtmlcontent = [System.Text.Encoding]::Unicode.GetBytes($htmlcontent)
                 $htmlobj.write($encodedhtmlcontent)
             } else {

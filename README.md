@@ -26,11 +26,13 @@ Get last Microsoft Office 365 SKU / Service plans info (GUID, String ID, Product
      - you can find a Service Plan based on its GUID, String ID (technical name), or friendly name (aka commercial name)
  - cmdlet to find in the SKUs containing a Service Plan : *Get-O365SKUInfoFromPlan*
      - you can use a Service Plan based on its GUID, String ID (technical name), or friendly name (aka commercial name)
-### 1.1.0 last public release
+### 1.1.0
  - fix IE com object issue (Windows pwsh crash with invoke-webrequest)
  - using basic parsing and HTMLFile com object
  - now compatible with Powershell Core on Windows system
  - use now Github Markdown document as source instead of Microsoft website
+### 1.1.1 last public release
+ - minor update, replace `$host` with `$psversiontable`
 
 ## Why this PowerShell Module
 - When you often deal with Office 365 SKUs and Services Plan (technically speaking) it's a nightmare to resolve name to technical GUID to be sure the proper SKU and Service Plan is linked to the right Azure AD user or Azure AD group.

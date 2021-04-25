@@ -12,7 +12,7 @@
 RootModule = 'Get-O365SKUsInfos.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.1.0'
+ModuleVersion = '1.1.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -107,7 +107,7 @@ PrivateData = @{
         IconUri = 'https://www.lucas-cueff.com/files/gallery.png'
 
         # ReleaseNotes of this module
-        ReleaseNotes = "last release - fix IE com object issue with last HTML update released."
+        ReleaseNotes = "last release - minor update, replace host with psversiontable variable."
 
     } # End of PSData hashtable
 

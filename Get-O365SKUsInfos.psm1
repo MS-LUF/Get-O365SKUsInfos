@@ -4,7 +4,8 @@
 ## released on 01/2021
 #
 # v1.0.0 : first public release - beta version
-# v1.1.0 : last public release - beta version - fix IE com object (windows pwsh crash with invoke-webrequest)
+# v1.1.0 : beta version - fix IE com object (windows pwsh crash with invoke-webrequest)
+# v1.1.1 : last public release - beta version - minor update, replace $host with $psversiontable
 #
 #'(c) 2020-2021 lucas-cueff.com - Distributed under Artistic Licence 2.0 (https://opensource.org/licenses/artistic-license-2.0).'
 <#
@@ -123,7 +124,7 @@ function Get-O365SKUCatalog {
             throw "not able to create HTMLFile com object"
         }
         try {
-            if ($host.Version.Major -gt 5) {
+            if ($PSVersionTable.PSVersion.Major -gt 5) {
                 $encodedhtmlcontent = [System.Text.Encoding]::Unicode.GetBytes($htmlcontent)
                 $htmlobj.write($encodedhtmlcontent)
             } else {
